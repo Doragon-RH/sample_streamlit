@@ -63,7 +63,7 @@ alarm = st.time_input("アラームセット", time(8,45))
 uploaded_file = st.file_uploader("ファイル選択")
 
 #サイドバーに表示
-add_selectbox = st.sliderbar.selectbox("連絡方法は？",
+add_selectbox = st.sidebar.selectbox("連絡方法は？",
                                        ("Email", "Home phone", "Mobile phone"))
 
 col1, col2 = st.beta_columns([1,2])
