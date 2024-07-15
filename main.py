@@ -62,14 +62,13 @@ d = st.date_input("誕生日は？", date(2019,7,6))
 alarm = st.time_input("アラームセット", time(8,45))
 uploaded_file = st.file_uploader("ファイル選択")
 
-#サイドバーに表示
-add_selectbox = st.sidebar.selectbox("連絡方法は？",
-                                       ("Email", "Home phone", "Mobile phone"))
+# サイドバーに表示
+add_selectbox = st.sidebar.selectbox("連絡方法は？", ("Email", "Home phone", "Mobile phone"))
 
-col1, col2 = st.beta_columns([1,2])
+col1, col2 = st.columns([1, 2])
 with col1:
     st.header("A cat")
-    st.image("https://statuc.streamlit.io/examples/cat.jpg", use_column_width=True)
+    st.image("https://static.streamlit.io/examples/cat.jpg", use_column_width=True)
 with col2:
     st.header("A dog")
     st.image("https://static.streamlit.io/examples/dog.jpg", use_column_width=True)
