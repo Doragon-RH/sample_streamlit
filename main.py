@@ -72,3 +72,53 @@ with col1:
 with col2:
     st.header("A dog")
     st.image("https://static.streamlit.io/examples/dog.jpg", use_column_width=True)
+
+import time
+
+@st.cache
+def f(input):
+    time.sleep(3)
+    return input*10
+
+st.write(f(10))
+st.write(f(100))
+st.write(f(10)) #キャッシュされているので1瞬で終わる
+
+import random 
+@st.cache(allow_output_mutation=True) #返り血が変わる場合にはTrueにする
+def f(input):
+    time.sleep(3)
+    return input*random.random()
+
+st.write(f(10))
+st.write(f(100))
+st.write(f(10)) #キャッシュされているので1瞬で終わる
+
+#データフレームのハッシュ地をidとする
+@st.cache(hash_funcs={pd.DataFrame: id})
+def f(data):
+    time.sleep(3)
+    return data.values
+
+df = px.data.iris()
+
+if "count" not in st.session_state:
+    st.session_state.count = 0
+
+increment = st.button("Increment")
+if increment:
+    st.session_state.count += 1
+st.write("Count = ",st.session_state.count)
+
+if "celsius" not in st.session_state:
+    st.session_state.celsius = 50.0
+st.slider("Temperature in Celsius", min_value=0.0, max_value=100.0, key="celsius")
+st.write(st.session_state.celsius )
+
+with st.form(key="basic_form"):
+    n_jobs = st.number_input("最大ジョブ数", min_value=1, max_value=10000, value=100)
+    n_shipment = st.number_input("最大輸送数", min_value=1, max_value=10000, value=100)
+    submit = st.form_submit_button(label="データ更新")
+
+if submit:
+    st.write(n_jobs, n_shipment)
